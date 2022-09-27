@@ -3,7 +3,7 @@
 	"properties": {
 		"description": "This trigger is activated when a file is uploaded in the blob storage",
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipelines": [
 			{
 				"pipelineReference": {
