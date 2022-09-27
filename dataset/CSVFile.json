@@ -1,0 +1,41 @@
+{
+	"name": "CSVFile",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "TestBlob",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Data.csv",
+				"container": "adfexample"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Invoice_id",
+				"type": "String"
+			},
+			{
+				"name": "Prod_id",
+				"type": "String"
+			},
+			{
+				"name": "Location_id",
+				"type": "String"
+			},
+			{
+				"name": "Qty",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

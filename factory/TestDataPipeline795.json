@@ -1,0 +1,9 @@
+{
+	"name": "TestDataPipeline795",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "e17c9553-2193-4364-8982-7fbdfc26b26b",
+		"tenantId": "6359b85b-b4bd-4bf5-9fa2-db7557cb0e84"
+	}
+}

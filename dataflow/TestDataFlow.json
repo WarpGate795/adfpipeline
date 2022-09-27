@@ -1,0 +1,60 @@
+{
+	"name": "TestDataFlow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "CSVFile",
+						"type": "DatasetReference"
+					},
+					"name": "FlatFIletoSQL"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TestSQLTable",
+						"type": "DatasetReference"
+					},
+					"name": "SQLSink"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          Invoice_id as long,",
+				"          Prod_id as integer,",
+				"          Location_id as integer,",
+				"          Qty as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> FlatFIletoSQL",
+				"FlatFIletoSQL sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id as long,",
+				"          prod_id as integer,",
+				"          loc_id as integer,",
+				"          qty as integer",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          id = Invoice_id,",
+				"          prod_id = Prod_id,",
+				"          loc_id = Location_id,",
+				"          qty = Qty",
+				"     )) ~> SQLSink"
+			]
+		}
+	}
+}

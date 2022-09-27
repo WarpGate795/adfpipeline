@@ -1,0 +1,38 @@
+{
+	"name": "TestSQLTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "TestSQLConn",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "prod_id",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "loc_id",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "qty",
+				"type": "tinyint",
+				"precision": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "test_transaction"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,88 @@
+{
+	"name": "TestPipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "TestDataFlow",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "TestDataFlow",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "Inventory Stock Check",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "TestDataFlow",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[record_check]"
+				},
+				"linkedServiceName": {
+					"referenceName": "TestSQLConn",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Back Order Updates",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Inventory Stock Check",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_backlogs]"
+				},
+				"linkedServiceName": {
+					"referenceName": "TestSQLConn",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-09-27T15:20:03Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
