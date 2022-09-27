@@ -1,0 +1,84 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "TestDataPipeline795"
+		},
+		"CSVToSQL_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CSVToSQL'"
+		},
+		"SQLConnection_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SQLConnection'"
+		},
+		"SQLDestTest_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SQLDestTest'"
+		},
+		"TestBlob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'TestBlob'"
+		},
+		"TestSQLConn_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'TestSQLConn'"
+		},
+		"UploadTrigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/f92d31c2-92a2-4653-b1d4-8121b74d3fb0/resourceGroups/ADFExample/providers/Microsoft.Storage/storageAccounts/vickicii"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "TestDataPipeline795_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"CSVToSQL_connectionString": {
+						"value": "[parameters('CSVToSQL_connectionString')]"
+					},
+					"SQLConnection_connectionString": {
+						"value": "[parameters('SQLConnection_connectionString')]"
+					},
+					"SQLDestTest_connectionString": {
+						"value": "[parameters('SQLDestTest_connectionString')]"
+					},
+					"TestBlob_connectionString": {
+						"value": "[parameters('TestBlob_connectionString')]"
+					},
+					"TestSQLConn_connectionString": {
+						"value": "[parameters('TestSQLConn_connectionString')]"
+					},
+					"UploadTrigger_properties_typeProperties_scope": {
+						"value": "[parameters('UploadTrigger_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

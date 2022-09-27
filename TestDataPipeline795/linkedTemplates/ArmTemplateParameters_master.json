@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "TestDataPipeline795"
+		},
+		"CSVToSQL_connectionString": {
+			"value": ""
+		},
+		"SQLConnection_connectionString": {
+			"value": ""
+		},
+		"SQLDestTest_connectionString": {
+			"value": ""
+		},
+		"TestBlob_connectionString": {
+			"value": ""
+		},
+		"TestSQLConn_connectionString": {
+			"value": ""
+		},
+		"UploadTrigger_properties_typeProperties_scope": {
+			"value": "/subscriptions/f92d31c2-92a2-4653-b1d4-8121b74d3fb0/resourceGroups/ADFExample/providers/Microsoft.Storage/storageAccounts/vickicii"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
