@@ -1,0 +1,26 @@
+{
+	"name": "UploadTrigger",
+	"properties": {
+		"description": "This trigger is activated when a file is uploaded in the blob storage",
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "TestPipeline",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/adfexample/blobs/Data",
+			"blobPathEndsWith": ".csv",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/f92d31c2-92a2-4653-b1d4-8121b74d3fb0/resourceGroups/ADFExample/providers/Microsoft.Storage/storageAccounts/vickicii",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
